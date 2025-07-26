@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Contact - Mon Portfolio</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -10,9 +10,9 @@
 <body>
     <!-- Navigation mise à jour -->
     <nav>
-        <div class="container">
-            <div class="logo">Mon Portfolio</div>
-            <ul class="nav-links">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Mon Portfolio</a>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="parcours.html">Parcours</a></li>
                 <li><a href="experiences.html">Expériences</a></li>
@@ -20,77 +20,100 @@
                 <li><a href="competences.html">Compétences</a></li>
                 <li><a href="contact.html" class="active">Contact</a></li>
             </ul>
-            <button class="burger" aria-label="Menu" aria-expanded="false">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
+            <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false">
+                <span class="line1"></span>
+                <span class="line2"></span>
+                <span class="line3"></span>
             </button>
         </div>
     </nav>
 
     <!-- Section Contact -->
-    <section class="contact">
+    <main class="contact">
         <div class="container">
             <h1>Contactez-moi</h1>
             
             <div class="contact-container">
-                <div class="contact-info">
+                <section class="contact-info">
                     <h2>Mes coordonnées</h2>
                     <div class="info-item">
-                        <i class="fas fa-envelope"></i>
-                        <p>younesstamouh1@gmail.com</p>
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <a href="mailto:younesstamouh1@gmail.com">younesstamouh1@gmail.com</a>
                     </div>
                     <div class="info-item">
-                        <i class="fas fa-phone"></i>
-                        <p>+212 6 09 37 93 74</p>
+                        <i class="fas fa-phone" aria-hidden="true"></i>
+                        <a href="tel:+212609379374">+212 6 09 37 93 74</a>
                     </div>
                     <div class="info-item">
-                        <i class="fab fa-linkedin"></i>
-                        <a href="https://www.linkedin.com/in/younes-tamouh-b84335253/" target="_blank">LinkedIn</a>
+                        <i class="fab fa-linkedin" aria-hidden="true"></i>
+                        <a href="https://www.linkedin.com/in/younes-tamouh-b84335253/" target="_blank" rel="noopener noreferrer">Profil LinkedIn</a>
                     </div>
                     <div class="info-item">
-                        <i class="fas fa-file-pdf"></i>
-                        <a href="https://drive.google.com/file/d/1yS5oAuqCh0FU3MsUDlw_hjJ2Z21kGkvH/view?usp=sharing" download>Télécharger mon CV</a>
+                        <i class="fas fa-file-pdf" aria-hidden="true"></i>
+                        <a href="https://drive.google.com/file/d/1yS5oAuqCh0FU3MsUDlw_hjJ2Z21kGkvH/view?usp=sharing" download="CV-Younes-Tamouh">Télécharger mon CV</a>
                     </div>
-                </div>
+                    
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d[LATITUDE]!2d[LONGITUDE]!3d[ZOOM]!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDE1JzQyLjgiTiA2McKwMTknMjAuMCJF!5e0!3m2!1sfr!2sma!4v1620000000000!5m2!1sfr!2sma" 
+                                width="100%" 
+                                height="250" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy"
+                                aria-label="Localisation sur la carte">
+                        </iframe>
+                    </div>
+                </section>
                 
-                <div class="contact-form">
+                <section class="contact-form">
                     <h2>Envoyez-moi un message</h2>
                     <form action="https://formspree.io/f/xgvzklal" method="POST">
                         <div class="form-group">
-                            <label for="name">Nom complet</label>
-                            <input type="text" id="name" name="name" required>
+                            <label for="name">Nom complet <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" required aria-required="true">
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required aria-required="true">
                         </div>
                         <div class="form-group">
-                            <label for="subject">Sujet</label>
-                            <input type="text" id="subject" name="subject" required>
+                            <label for="subject">Sujet <span class="required">*</span></label>
+                            <input type="text" id="subject" name="subject" required aria-required="true">
                         </div>
                         <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <label for="message">Message <span class="required">*</span></label>
+                            <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
                         </div>
-                        <button type="submit" class="btn">Envoyer</button>
+                        <button type="submit" class="btn">
+                            <i class="fas fa-paper-plane"></i> Envoyer
+                        </button>
                     </form>
-                </div>
+                </section>
             </div>
         </div>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 Mon Portfolio. Tous droits réservés.</p>
+            <p>&copy; <span id="current-year">2025</span> Mon Portfolio. Tous droits réservés.</p>
             <div class="social-links">
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/younes-tamouh-b84335253/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:younesstamouh1@gmail.com" aria-label="Envoyer un email">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
         </div>
     </footer>
 
     <script src="assets/js/script.js"></script>
+    <script>
+        // Mise à jour automatique de l'année
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Ajoutez ici d'autres scripts si nécessaire
+    </script>
 </body>
 </html>

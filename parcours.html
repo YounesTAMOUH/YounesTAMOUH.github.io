@@ -2,95 +2,213 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parcours Académique - Mon Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Parcours Académique - Younes Tamouh | Ingénieur Industriel</title>
+    <meta name="description" content="Parcours académique complet de Younes Tamouh, ingénieur industriel spécialisé en génie industriel et amélioration des processus">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <!-- Navigation mise à jour -->
     <nav>
-        <div class="container">
-            <div class="logo">Mon Portfolio</div>
-            <ul class="nav-links">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo-portfolio.png" alt="Logo Portfolio" class="logo-img" loading="lazy">
+            </a>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Accueil</a></li>
-                <li><a href="parcours.html" class="active">Parcours académique</a></li>
+                <li><a href="parcours.html" class="active">Parcours</a></li>
                 <li><a href="experiences.html">Expériences</a></li>
                 <li><a href="projets.html">Projets</a></li>
                 <li><a href="competences.html">Compétences</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            <button class="burger" aria-label="Menu" aria-expanded="false">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
+            <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false">
+                <span class="line1"></span>
+                <span class="line2"></span>
+                <span class="line3"></span>
             </button>
         </div>
     </nav>
 
     <!-- Section Parcours académique -->
-    <section class="parcours">
+    <main class="parcours">
         <div class="container">
             <h1>Mon Parcours Académique</h1>
             
             <div class="timeline">
                 <!-- Baccalauréat -->
-                <div class="timeline-item">
+                <article class="timeline-item">
                     <div class="timeline-content">
-                        <h2>Baccalauréat en Science et technologie mécanique</h2>
-                        <p class="mention">Mention : Bien</p>
+                        <div class="timeline-header">
+                            <h2>Baccalauréat en Sciences et Technologies Mécaniques</h2>
+                            <div class="timeline-meta">
+                                <p class="mention"><i class="fas fa-medal"></i> Mention : Bien</p>
+                                <p class="date"><i class="fas fa-calendar-alt"></i> 2015 - 2016</p>
+                            </div>
+                        </div>
                         <div class="timeline-details">
-                            <p>J'ai obtenu mon baccalauréat en Sciences et Technologies Mécaniques (STM), une filière qui combine les Sciences de l'Ingénieur, les Mathématiques et la Physique-Chimie, avec des coefficients importants.</p>
-                            <p>Cette spécialité met l'accent sur plusieurs unités d'apprentissage, notamment :</p>
-                            <ul>
-                                <li>L'unité de conception, où nous avons appris à lire et interpréter un dessin technique, ainsi qu'à comprendre les principes d'assemblage mécanique.</li>
-                                <li>L'unité de production, qui nous a permis d'acquérir des connaissances sur les procédés de fabrication, les techniques de mesure et de contrôle, le traitement thermique, les plans techniques et la cotation ISO GPS, les gammes de fabrication et la nomenclature.</li>
-                                <li>Enfin, la CFAO (Conception et Fabrication Assistées par Ordinateur), où nous avons manipulé des logiciels comme CATIA V5 et SolidWorks pour modéliser des pièces mécaniques.</li>
+                            <p>Formation intensive combinant sciences de l'ingénieur, mathématiques et physique-chimie avec des coefficients importants.</p>
+                            <h3>Principaux acquis :</h3>
+                            <ul class="timeline-skills">
+                                <li><i class="fas fa-check"></i> <strong>Conception mécanique</strong> : Lecture et interprétation de plans techniques, principes d'assemblage</li>
+                                <li><i class="fas fa-check"></i> <strong>Production industrielle</strong> : Procédés de fabrication, métrologie, traitement thermique</li>
+                                <li><i class="fas fa-check"></i> <strong>CFAO</strong> : Modélisation 3D avec CATIA V5 et SolidWorks</li>
+                                <li><i class="fas fa-check"></i> <strong>Cotation ISO GPS</strong> : Normes de tolérancement géométrique</li>
                             </ul>
                         </div>
                     </div>
-                </div>
+                </article>
                 
                 <!-- CPGE -->
-                <div class="timeline-item">
+                <article class="timeline-item">
                     <div class="timeline-content">
-                        <h2>CPGE Mohammadia</h2>
-                        <p class="mention">Attestation d'admission aux concours national commun (CNC)</p>
-                        <p class="mention">Spécialité : Technologie et science industriel (TSI)</p>
+                        <div class="timeline-header">
+                            <h2>Classes Préparatoires aux Grandes Écoles (CPGE)</h2>
+                            <div class="timeline-meta">
+                                <p class="mention"><i class="fas fa-university"></i> Lycée Mohammed V - Casablanca</p>
+                                <p class="date"><i class="fas fa-calendar-alt"></i> 2016 - 2018</p>
+                            </div>
+                        </div>
                         <div class="timeline-details">
-                            <p>Une formation de deux ans basée sur les Mathématiques, la Physique, les Sciences Industrielles de l'Ingénieur et l'Informatique.</p>
-                            <p>C'est une période durant laquelle j'ai développé un esprit critique et analytique, ainsi qu'une solide base scientifique et technique.</p>
+                            <p>Formation exigeante en TSI (Technologie et Sciences Industrielles) préparant aux concours d'entrée aux grandes écoles d'ingénieurs.</p>
+                            <h3>Programme intensif :</h3>
+                            <div class="curriculum-grid">
+                                <div class="curriculum-item">
+                                    <h4><i class="fas fa-square-root-alt"></i> Mathématiques</h4>
+                                    <ul>
+                                        <li>Algèbre linéaire</li>
+                                        <li>Analyse avancée</li>
+                                        <li>Probabilités</li>
+                                    </ul>
+                                </div>
+                                <div class="curriculum-item">
+                                    <h4><i class="fas fa-atom"></i> Physique</h4>
+                                    <ul>
+                                        <li>Mécanique des solides</li>
+                                        <li>Électromagnétisme</li>
+                                        <li>Thermodynamique</li>
+                                    </ul>
+                                </div>
+                                <div class="curriculum-item">
+                                    <h4><i class="fas fa-cogs"></i> Sciences Industrielles</h4>
+                                    <ul>
+                                        <li>Automatique</li>
+                                        <li>Mécanique</li>
+                                        <li>Électrotechnique</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="achievement"><i class="fas fa-trophy"></i> Admis aux concours nationaux communs (CNC)</p>
                         </div>
                     </div>
-                </div>
+                </article>
                 
                 <!-- ENSA Safi -->
-                <div class="timeline-item">
+                <article class="timeline-item">
                     <div class="timeline-content">
-                        <h2>ENSA Safi</h2>
-                        <p class="mention">Ingénieur d'Etat</p>
-                        <p class="mention">Spécialité : Génie industriel</p>
+                        <div class="timeline-header">
+                            <h2>Diplôme d'Ingénieur d'État en Génie Industriel</h2>
+                            <div class="timeline-meta">
+                                <p class="mention"><i class="fas fa-graduation-cap"></i> ENSA Safi</p>
+                                <p class="date"><i class="fas fa-calendar-alt"></i> 2018 - 2021</p>
+                            </div>
+                        </div>
                         <div class="timeline-details">
-                            <p>La formation en cycle ingénieur intitulée "Génie Industriel" permet d'aborder plusieurs aspects clés tels que la qualité, la maintenance, la gestion de projet, la logistique et la santé, sécurité et environnement (HSE).</p>
-                            <p>Elle offre ainsi aux lauréats la capacité de gérer des projets industriels, d'optimiser et de piloter des systèmes complexes, et d'intervenir efficacement sur le terrain.</p>
+                            <p>Formation complète en génie industriel avec spécialisation en amélioration continue et gestion des systèmes de production.</p>
+                            
+                            <h3>Spécialisations :</h3>
+                            <ul class="specializations">
+                                <li>
+                                    <i class="fas fa-chart-line"></i>
+                                    <div>
+                                        <h4>Optimisation des processus</h4>
+                                        <p>Méthodes Lean, Six Sigma, analyse des flux de valeur</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-project-diagram"></i>
+                                    <div>
+                                        <h4>Gestion de projets industriels</h4>
+                                        <p>Planification, gestion des risques, méthodologie Agile</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-industry"></i>
+                                    <div>
+                                        <h4>Systèmes de production</h4>
+                                        <p>GPAO, ERP, automatisation industrielle</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            
+                            <h3>Projet de fin d'études :</h3>
+                            <p>"Optimisation des indicateurs MTBF et MTTR dans une unité de production" - Note : 16/20</p>
                         </div>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 Mon Portfolio. Tous droits réservés.</p>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fas fa-envelope"></i></a>
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>Younes Tamouh</h3>
+                    <p>Ingénieur industriel spécialisé en amélioration continue et optimisation des processus</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Navigation rapide</h3>
+                    <ul>
+                        <li><a href="projets.html">Mes projets</a></li>
+                        <li><a href="competences.html">Mes compétences</a></li>
+                        <li><a href="contact.html">Contactez-moi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Coordonnées</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> younesstamouh1@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +212 6 09 37 93 74</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2025</span> Tous droits réservés</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/younes-tamouh-b84335253/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="mailto:younesstamouh1@gmail.com" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
 
     <script src="assets/js/script.js"></script>
+    <script>
+        // Mise à jour automatique de l'année
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Animation de la timeline
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                    timelineObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        timelineItems.forEach(item => {
+            timelineObserver.observe(item);
+        });
+    </script>
 </body>
 </html>
