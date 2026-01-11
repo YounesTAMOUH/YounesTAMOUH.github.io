@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - TAMOUH Younes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        /* Header avec logo */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            height: 60px;
+            object-fit: contain;
+        }
+
+        /* Bouton menu burger */
+        .menu-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            cursor: pointer;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .menu-btn span {
+            width: 25px;
+            height: 2px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        /* Sidebar navigation */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: rgba(20, 20, 20, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            padding: 100px 30px 30px;
+            transition: left 0.4s ease;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar nav a {
+            display: block;
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-size: 18px;
+            border: 1px solid transparent;
+        }
+
+        .sidebar nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(10px);
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 120px 50px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Home Section */
+        #home {
+            position: relative;
+            padding: 0;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .video-overlay h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+        }
+
+        .video-overlay p {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            max-width: 800px;
+        }
+
+        .video-overlay .subtitle {
+            font-size: 2rem;
+            color: #4a9eff;
+            font-weight: bold;
+        }
+
+        /* Profile Section */
+        #profile {
+            flex-direction: row;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .profile-left {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #4a9eff;
+            margin-bottom: 20px;
+            box-shadow: 0 0 30px rgba(74, 158, 255, 0.3);
+        }
+
+        .profile-left h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .profile-left p {
+            color: #4a9eff;
+            font-size: 1.1rem;
+        }
+
+        .profile-right {
+            flex: 2;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-right h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #4a9eff;
+        }
+
+        .profile-right p {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* Background Section */
+        .education-item {
+            width: 100%;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+
+        .education-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .education-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #4a9eff;
+        }
+
+        .education-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #888;
+        }
+
+        .education-item p {
+            line-height: 1.8;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .skill-block {
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .skill-block.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-block h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #4a9eff;
+            text-align: center;
+        }
+
+        .skill-block ul {
+            list-style: none;
+        }
+
+        .skill-block li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .skill-block li:last-child {
+            border-bottom: none;
+        }
+
+        /* Experience Section */
+        .experience-item {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+
+        .experience-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .experience-item img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .experience-content {
+            flex: 1;
+        }
+
+        .experience-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #4a9eff;
+        }
+
+        .experience-content h4 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #888;
+        }
+
+        .experience-content p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .video-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #4a9eff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .video-btn:hover {
+            background: #3a8eef;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(74, 158, 255, 0.4);
+        }
+
+        /* Projects Section */
+        .project-item {
+            width: 100%;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .project-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .project-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #4a9eff;
+        }
+
+        .project-item p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* Contact Section */
+        #contact {
+            position: relative;
+            padding: 0;
+        }
+
+        .contact-content {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        /* Modal Video */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 900px;
+            position: relative;
+        }
+
+        .modal iframe {
+            width: 100%;
+            height: 500px;
+            border-radius: 10px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            #profile {
+                flex-direction: column;
+            }
+
+            .experience-item {
+                flex-direction: column;
+            }
+
+            .experience-item img {
+                width: 100%;
+                height: 200px;
+            }
+
+            .video-overlay h1 {
+                font-size: 2.5rem;
+            }
+
+            .video-overlay p {
+                font-size: 1.2rem;
+            }
+
+            .video-overlay .subtitle {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <img src="Image/LogoSite.jpg" alt="Logo" class="logo">
+    </header>
+
+    <!-- Menu Button -->
+    <div class="menu-btn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <nav>
+            <a href="#home" onclick="scrollToSection('home')">Home</a>
+            <a href="#profile" onclick="scrollToSection('profile')">Profile</a>
+            <a href="#background" onclick="scrollToSection('background')">Background</a>
+            <a href="#skills" onclick="scrollToSection('skills')">Skills</a>
+            <a href="#experience" onclick="scrollToSection('experience')">Experience</a>
+            <a href="#projects" onclick="scrollToSection('projects')">Projects</a>
+            <a href="#contact" onclick="scrollToSection('contact')">Contact</a>
+        </nav>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="video-container">
+            <video autoplay muted loop playsinline>
+                <source src="Video/1.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="video-overlay">
+            <h1>Welcome to my portfolio</h1>
+            <p>I hope this will help you get to know me better</p>
+            <p class="subtitle">Industrial Engineer & Project Engineer</p>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile">
+        <div class="profile-left">
+            <img src="Image/photo-profil.jpg" alt="TAMOUH Younes" class="profile-image">
+            <h2>TAMOUH Younes</h2>
+            <p>Industrial Engineer & Project Engineer</p>
+        </div>
+        <div class="profile-right">
+            <h3>Profil</h3>
+            <p>Industrial Engineering and Project Engineer, specialized in Lean Manufacturing, continuous improvement, and industrial project management. Experienced in the automotive sector, I am involved from project scope definition through final delivery, ensuring coordination of cross-functional teams (Production, Quality, Maintenance), product compliance, non-conformity management, and customer satisfaction. Motivated, detail-oriented, and results-driven, I leverage Lean, quality, and digitalization tools to drive operational excellence and sustainable performance.</p>
+        </div>
+    </section>
+
+    <!-- Background Section -->
+    <section id="background">
+        <div class="education-item">
+            <h3>Bachelor's Degree in Mechanical Science and Technology</h3>
+            <h4>Honors: Good</h4>
+            <p>I obtained a Bachelor's degree in Mechanical Science and Technology (STM), a program that combines Engineering Sciences, Mathematics, and Physics-Chemistry, with a strong focus on core subjects. This specialization emphasizes several key learning units, including: Design Unit: where we learned to read and interpret technical drawings and understand mechanical assembly principles. Production Unit: which provided knowledge on manufacturing processes, measurement and control techniques, heat treatment, technical drawings and ISO GPS tolerancing, manufacturing workflows, and bill of materials. CAD/CAM (Computer-Aided Design and Manufacturing): where we worked with software such as CATIA V5 and SolidWorks to model mechanical components.</p>
+        </div>
+
+        <div class="education-item">
+            <h3>Certificate of Admission to the National Common Competition (CNC)</h3>
+            <h4>Specialization: Industrial Science and Technology (TSI)</h4>
+            <p>A two-year program based on Mathematics, Physics, Engineering Sciences, and Computer Science. During this period, I developed critical and analytical thinking skills, along with a solid scientific and technical foundation.</p>
+        </div>
+
+        <div class="education-item">
+            <h3>State Engineer</h3>
+            <h4>Specialization: Industrial Engineering</h4>
+            <p>The engineering program in Industrial Engineering covers key aspects such as quality, maintenance, project management, logistics, and Health, Safety & Environment (HSE). It equips graduates with the ability to manage industrial projects, optimize and oversee complex systems, and operate effectively in the field.</p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="skills-container">
+            <div class="skill-block">
+                <h3>Managerial Skills</h3>
+                <ul>
+                    <li>Lean Manufacturing: 5S, Kaizen, SMED</li>
+                    <li>Problem-Solving: 5 Whys, Ishikawa, Pareto</li>
+                    <li>Brainstorming, FMEA</li>
+                    <li>SWOT Analysis, 5W1H, 8D Method</li>
+                    <li>QHSE: ISO 9001, ISO 14001, ISO 45001</li>
+                    <li>Project Management: PERT, GANTT, WBS</li>
+                </ul>
+            </div>
+
+            <div class="skill-block">
+                <h3>Technical Skills</h3>
+                <ul>
+                    <li>CAD & Design: CATIA V5</li>
+                    <li>Part Design, Assembly Design</li>
+                    <li>Measurement and Control Techniques</li>
+                    <li>Manufacturing Processes</li>
+                    <li>Technical Drawings and ISO GPS</li>
+                    <li>Manufacturing Workflows and BOM</li>
+                </ul>
+            </div>
+
+            <div class="skill-block">
+                <h3>IT & Software Skills</h3>
+                <ul>
+                    <li>Office: Word, Excel, PowerPoint, Canva</li>
+                    <li>Astah SysML</li>
+                    <li>Python, VBA</li>
+                    <li>Power BI</li>
+                    <li>MS Project</li>
+                    <li>OpenMeca, CATIA V5</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="experience-item">
+            <img src="Image/auto-hall-stage.jpg" alt="Auto-Hall">
+            <div class="experience-content">
+                <h3>Observation Internship</h3>
+                <h4>Company: Groupe Auto-Hall (Ford subsidiary) | Department: Spare Parts (PDR)</h4>
+                <p>This was an observation internship during which I learned about the Incoterms used, the supply chain, the order project launch process, and the mechanical workshop.</p>
+            </div>
+        </div>
+
+        <div class="experience-item">
+            <img src="Image/cobicab-logistique.jpg" alt="Coficab">
+            <div class="experience-content">
+                <h3>Engineer Internship in Continuous Improvement</h3>
+                <h4>Company: Coficab | Department: Logistics</h4>
+                <p><strong>Projects:</strong> Analysis and optimization of discrepancies observed in production waste management</p>
+                <p>The work began with data collection on-site, followed by visualization using Power BI. While on-site, I applied the 5M method (Man, Materials, Methods, Environment, and Machines) to identify the different root causes of malfunctions.</p>
+            </div>
+        </div>
+
+        <div class="experience-item">
+            <img src="Image/aptivstage.jpg" alt="APTIV">
+            <div class="experience-content">
+                <h3>Engineer Internship in Continuous Improvement</h3>
+                <h4>Company: APTIV | Department: Maintenance</h4>
+                <p><strong>Projects:</strong> Digitalization of the daily energy consumption monitoring process as part of an environmental audit in compliance with ISO 14001 standards</p>
+                <p>I designed and implemented a centralized system for daily energy consumption monitoring. This system includes automatic alerts, automatic invoice generation, dashboard for weekly meetings, and document archiving.</p>
+                <button class="video-btn" onclick="openVideoModal('https://drive.google.com/file/d/1LYv8dsjPooPkzfY58xu4Lk73DB6fBZHb/preview')">Watch the video</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="project-item">
+            <img src="Image/projet1.jpg" alt="Billing Management">
+            <h3>Billing Management</h3>
+            <p>I designed a VBA (Visual Basic for Applications) application dedicated to automating the billing process, aiming to save time and reduce errors. This application allows the creation, configuration, and organization of various commonly used business documents, including purchase orders, delivery notes, and invoices, with automatic email distribution to the relevant stakeholders. It also includes a dashboard to monitor the payment status of invoices, orders, and other key items.</p>
+            <button class="video-btn" onclick="openVideoModal('https://drive.google.com/file/d/1UdoGR6IvnQgAUuoEbRmaNmVuY5ct0tr5/preview')">Watch the video</button>
+        </div>
+
+        <div class="project-item">
+            <img src="Image/projet2.jpg" alt="Automatic Conveyor">
+            <h3>Automatic Conveyor: Product Sorting by Color</h3>
+            <p>This is a highly important project for the food industry, enabling time savings, better product management, and a significant reduction in errors during sorting. The system automates the sorting process by identifying products based on their color, optimizing the production line and improving overall efficiency.</p>
+            <button class="video-btn" onclick="openVideoModal('https://drive.google.com/file/d/105WvOPZ6KEg0whQ4tVg4BHteZlgvZT-I/preview')">Watch the video</button>
+        </div>
+
+        <div class="project-item">
+            <img src="Image/projet3.jpg" alt="Non-Conformity Tracking">
+            <h3>Non-Conformity Tracking</h3>
+            <p>An application was developed to collect daily non-conformities and display the Top 3 non-conformities in descending order based on the number of occurrences. It also generates a report containing detailed information and a Pareto chart that can be shared with the quality manager to support corrective and preventive actions. The application is accompanied by a dashboard for easier monitoring and analysis, improving visibility and decision-making.</p>
+        </div>
+
+        <div class="project-item">
+            <img src="Image/projet4.jpg" alt="Process Automation">
+            <h3>Process Automation</h3>
+            <p><strong>1. MTBF and MTTR Calculation Automation:</strong> I developed a standardized Excel file to automate the calculation of MTBF (Mean Time Between Failures) and MTTR (Mean Time To Repair) indicators. This solution helped managers save time and reduce human errors.</p>
+            <p><strong>2. Digitalization of Critical Item Control:</strong> At APTIV, I developed a solution where, after extracting a file from the SAP system, the warehouse manager can use this file in a VBA program. The program automatically processes the data and generates a priority list of items to order urgently.</p>
+            <p><strong>3. AHP Method Automation:</strong> The AHP (Analytic Hierarchy Process) method involves a hierarchical breakdown of the decision problem, allowing systematic analysis and prioritization of criteria and alternatives.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="video-container">
+            <video autoplay muted loop playsinline>
+                <source src="Video/2.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="contact-content">
+            <a href="CV/Tamouh Younes.pdf" class="video-btn" target="_blank">Télécharger mon CV</a>
+        </div>
+    </section>
+
+    <!-- Modal Video -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeVideoModal()">&times;</span>
+            <iframe id="videoIframe" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Menu
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        // Scroll to Section
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            element.scrollIntoView({ behavior: 'smooth' });
+            toggleMenu();
+        }
+
+        // Scroll Animation
+        function checkScroll() {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.75) {
+                    section.classList.add('visible');
+                }
+            });
+
+            // Education items
+            const eduItems = document.querySelectorAll('.education-item');
+            eduItems.forEach((item, index) => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85) {
+                    setTimeout(() => {
+                        item.classList.add('visible');
+                    }, index * 200);
+                }
+            });
+
+            // Skill blocks
+            const skillBlocks = document.querySelectorAll('.skill-block');
+            skillBlocks.forEach((block, index) => {
+                const rect = block.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85) {
+                    setTimeout(() => {
+                        block.classList.add('visible');
+                    }, index * 200);
+                }
+            });
+
+            // Experience items
+            const expItems = document.querySelectorAll('.experience-item');
+            expItems.forEach((item, index) => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85) {
+                    setTimeout(() => {
+                        item.classList.add('visible');
+                    }, index * 200);
+                }
+            });
+
+            // Project items
+            const projectItems = document.querySelectorAll('.project-item');
+            projectItems.forEach((item, index) => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85) {
+                    setTimeout(() => {
+                        item.classList.add('visible');
+                    }, index * 200);
+                }
+            });
+        }
+
+        // Video Modal
+        function openVideoModal(url) {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('videoIframe');
+            iframe.src = url;
+            modal.classList.add('active');
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('videoIframe');
+            iframe.src = '';
+            modal.classList.remove('active');
+        }
+
+        // Event Listeners
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', () => {
+            document.getElementById('home').classList.add('visible');
+            checkScroll();
+        });
+    </script>
+</body>
+</html>
